@@ -1,0 +1,40 @@
+<div class="container mt-5 col-md-offset-4 col-md-4">
+  <div
+    id="login-dialog"
+    class="jumbotron"
+    style="box-shadow: 2px 2px 15px #808080;"
+  >
+    <h2 class="text-center">Login Here</h2>
+    <div class="form-horizontal col-offset-3 col-md-12 mt-5">
+      <form #loginForm="ngForm" method="POST">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" id="txtUsername" name="txtUsername" ngModel #txtUsername="ngModel" class="form-control" placeholder="Username" required pattern="[a-zA-Z ]*" />
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="txtPassword" name="txtPassword" ngModel #txtPassword="ngModel" class="form-control" placeholder="Password" required/>
+        </div>
+        <div class="form-group">
+          <input type="radio" name="gender" ngModel #gender="ngModel" class="form-control-radio" value="D" required /> Doctor
+          <input type="radio" name="gender" ngModel #gender="ngModel" class="form-control-radio" value="H" required /> Hospital
+        </div>
+        <input
+          type="submit"
+          class="btn btn-primary col-md-6 mb-3"
+          value="Login"
+          [disabled]="loginForm.invalid"
+        /><br />
+        <div class="text-right"><a href="#">Forgot Password?</a></div>
+        <div *ngIf="txtUsername.touched || txtPassword.touched">
+            <div *ngIf="txtUsername.errors?.required && txtUsername.touched ">
+              <span class="text-danger">Username is required</span>
+            </div>
+            <div *ngIf="txtPassword.errors?.required && txtPassword.touched ">
+                <span class="text-danger">Password is required</span>
+              </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
