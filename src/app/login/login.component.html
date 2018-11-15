@@ -16,14 +16,15 @@
           <input type="password" id="txtPassword" name="txtPassword" ngModel #txtPassword="ngModel" class="form-control" placeholder="Password" required/>
         </div>
         <div class="form-group">
-          <input type="radio" name="gender" ngModel #gender="ngModel" class="form-control-radio" value="D" required /> Doctor
-          <input type="radio" name="gender" ngModel #gender="ngModel" class="form-control-radio" value="H" required /> Hospital
+          <input type="radio" name="optType" ngModel #optType="ngModel" class="form-control-radio" value="D" required /> Doctor
+          <input type="radio" name="optType" ngModel #optType="ngModel" class="form-control-radio" value="H" required /> Hospital
         </div>
         <input
           type="submit"
           class="btn btn-primary col-md-6 mb-3"
           value="Login"
           [disabled]="loginForm.invalid"
+          (click)="login(txtUsername.value, txtPassword.value, optType.value);"
         /><br />
         <div class="text-right"><a href="#">Forgot Password?</a></div>
         <div *ngIf="txtUsername.touched || txtPassword.touched">

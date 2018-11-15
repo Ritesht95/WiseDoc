@@ -11,6 +11,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HospitalComponent } from './hospital/hospital.component';
+import { ScheduleComponent } from './schedule/schedule.component';
+import { AppointmentsComponent } from './appointments/appointments.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { HospitalComponent } from './hospital/hospital.component';
     DashboardComponent,
     HeaderComponent,
     FooterComponent,
-    HospitalComponent
+    HospitalComponent,
+    ScheduleComponent,
+    AppointmentsComponent
   ],
   imports: [
     BrowserModule,

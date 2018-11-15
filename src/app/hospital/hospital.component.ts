@@ -6,10 +6,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./hospital.component.css']
 })
 export class HospitalComponent implements OnInit {
+  public objHospital: object = {
+    Name: 'Manish Hospital',
+    Email: 'contact@manishhospitals.com',
+    ContactNo: '1234567890',
+    PersonOfContact: 'Manish',
+    Password: 'HelloManish',
+    Address: 'Gali ke naake pe'
+  };
 
-  constructor() { }
-
-  ngOnInit() {
+  display() {
+  alert(this.objHospital);
   }
+  constructor() {}
 
+  ngOnInit() {}
 }

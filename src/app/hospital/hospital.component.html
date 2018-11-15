@@ -3,40 +3,42 @@
 <section id="hospital-form" class="mt-5 ml-5 col-md-10">
     <h3>Register Hospital</h3>
     <br>
+    <form method="post" #addHospital="ngForm">
     <div class="form-horizontal panel-body row">
         <div class="col-md-6">
             <div class="form-group">
                 <label>Name</label>
-                <input type="text" class="form-control" placeholder="Name of hospital">
+                <input type="text" id="txtName" name="txtName" [(ngModel)]="objHospital['Name']" #txtName="ngModel" class="form-control" placeholder="Name of hospital">
             </div>
             <div class="form-group">
                 <label>Email</label>
-                <input type="email" class="form-control" placeholder="Email id">
+                <input type="email" id="txtEmail" name="txtEmail" [(ngModel)]="objHospital['Email']" #txtEmail="ngModel" class="form-control" placeholder="Email id">
             </div>
             <div class="form-group">
                 <label>Contact No</label>
-                <input type="text" class="form-control" placeholder="Contact number of hospital">
+                <input type="text" id="txtContactNo" name="txtContactNo" [(ngModel)]="objHospital['ContactNo']" #txtContactNo="ngModel" class="form-control" placeholder="Contact number of hospital">
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
                 <label>Person of Contact</label>
-                <input type="text" class="form-control" placeholder="Person of contact">
+                <input type="text" id="txtContactPerson" name="txtContactPerson" [(ngModel)]="objHospital['PersonOfContact']" #txtContactPerson="ngModel" class="form-control" placeholder="Person of contact">
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" class="form-control" placeholder="Password for hospital to login">
+                <input type="password" id="txtPassword" name="txtPassword" [(ngModel)]="objHospital['Password']" #txtPassword="ngModel" class="form-control" placeholder="Password for hospital to login">
             </div>
             <div class="form-group">
                 <label>Address</label>
-                <textarea class="form-control" placeholder="Address of hospital"></textarea>
+                <textarea id="txtAddress" name="txtAddress" [(ngModel)]="objHospital['Address']" #txtAddress="ngModel" class="form-control" placeholder="Address of hospital"></textarea>
             </div>
         </div>
         <div class="col-md-6">
-            <input type="submit" class="btn btn-success" value="Submit">&nbsp;
+            <input type="submit" class="btn btn-success" value="Submit" (click)="display();">&nbsp;
             <input type="reset" class="btn btn-default" value="Reset">
         </div>
     </div>
+  </form>
 </section>
 <!-- Hospital Form: Name, Address, Email, Contact No, Person of Contact, Password  -->
 <app-footer></app-footer>

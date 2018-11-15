@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DoctorService } from '../doctor.service';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(public docService: DoctorService) { }
 
   ngOnInit() {
+  }
+
+  login(Username: string, Password: string, Type: boolean) {
+    this.docService.login(Username, Password, true).subscribe(
+      res => {
+        if (res.status === 200) {
+          alert(res.status);
+        } else {
+          alert(res.data);
+        }
+      }
+    );
   }
 
 }
