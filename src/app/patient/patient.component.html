@@ -1,0 +1,87 @@
+<app-header></app-header>
+<div class="container-fluid" style="margin-bottom: 100px;">
+  <section id="hospital-form" class="mt-5 ml-5 col-md-10">
+    <h3>Add Patient</h3>
+    <br />
+    <form method="post" #addHospital="ngForm">
+      <div class="form-horizontal panel-body row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Name</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Name of patient"
+              [(ngModel)]="objPatient.name"
+              #txtName="ngModel"
+              name="txtName"
+            />
+          </div>
+          <div class="form-group">
+            <label>Gender</label><br />
+            <input type="radio" #optGender="ngModel" [(ngModel)]="objPatient.gender" class="form-control-radio" value="M" name="optGender"/> Male
+            <input type="radio" #optGender="ngModel" [(ngModel)]="objPatient.gender" class="form-control-radio" value="F" name="optGender"/> Female
+            <input type="radio" #optGender="ngModel" [(ngModel)]="objPatient.gender" class="form-control-radio" value="T" name="optGender"/> Transgender
+          </div>
+          <div class="form-group">
+            <label>Contact No</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Contact number of patient"
+              [(ngModel)]="objPatient.contactNo"
+              #txtContactNo="ngModel"
+              name="txtContactNo"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Date of Birth</label>
+            <input type="date" class="form-control" [(ngModel)]="objPatient.dob" #txtDOB="ngModel" name="txtDOB"/>
+          </div>
+          <div class="form-group">
+            <label>Address</label>
+            <textarea
+              class="form-control"
+              placeholder="Address of patient"
+              [(ngModel)]="objPatient.address"
+              #txtAddress="ngModel"
+              name="txtAddress"
+            ></textarea>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <input type="submit" class="btn btn-success" value="Submit" (click)="submitForm()"/>&nbsp;
+          <input type="reset" class="btn btn-default" value="Reset" />
+        </div>
+      </div>
+    </form>
+  </section>
+  <br />
+  <section id="patientDataSection">
+    <div class="container">
+      <table class="table table-bordered table-hover">
+        <thead class="table-dark text-white">
+          <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Email</th>
+            <th>Contact No</th>
+            <!-- <th>Status</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of patientArr">
+            <td>{{ item.name }}</td>
+            <td>{{ item.address }}</td>
+            <td>{{ item.email }}</td>
+            <td>{{ item.contactNo }}</td>
+            <!-- <td>{{ item.active }}</td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+<app-footer></app-footer>

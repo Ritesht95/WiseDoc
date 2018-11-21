@@ -13,8 +13,30 @@ export class HospitalComponent implements OnInit {
     contactNo: '1234567890',
     personToContact: 'Manish',
     password: 'HelloManish',
-    address: 'Gali ke naake pe'
+    address: 'Gali ke naake pe',
+    active: true
   };
+
+  public hospitalArr = [
+    {
+      name: 'Manish Hospital',
+      email: 'contact@manishhospitals.com',
+      contactNo: '1234567890',
+      personToContact: 'Manish',
+      password: 'HelloManish',
+      address: 'Gali ke naake pe',
+      active: true
+    },
+    {
+      name: 'Manish Hospital',
+      email: 'contact@manishhospitals.com',
+      contactNo: '1234567890',
+      personToContact: 'Manish',
+      password: 'HelloManish',
+      address: 'Gali ke naake pe',
+      active: true
+    }
+  ];
 
   constructor(public doctorService: DoctorService) {}
 
