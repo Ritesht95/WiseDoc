@@ -2,24 +2,66 @@
 <div class="container" style="margin-bottom: 100px;">
   <form method="POST" #scheduleForm="ngForm">
     <section id="hospital-form" class="mt-5 row">
-        <div class="col-md-5 mt-5 ml-5 mr-5">
-          <h3>Add Schedule</h3><br>
-            <div class="form-group">
-                <label>Hospital Name</label>
-                <input name="txtHospital" id="txtHospital" ngModel #txtHospital="ngModel" list="HospitalBrowsers"  class="form-control" placeholder="Select Hospital">
-                <datalist id="HospitalBrowsers">
-                    <option value="ABC">ABC</option>
-                    <option value="XYZ">XYZ</option>
-                    <option value="PQR">PQR</option>
-                </datalist>
-            </div>
-            <div class="form-group">
-                <input type="date" class="form-control" name="txtDate" id="txtDate" ngModel #txtDate="ngModel">
-            </div>
-            <div class="form-group">
-                <input type="button" class="btn btn-primary" value="Add Schedule">
-            </div>
+      <div class="col-md-5 mt-5 ml-5 mr-5">
+        <h3>Add Schedule</h3>
+        <br />
+        <div class="form-group">
+          <label>Hospital Name</label>
+          <input
+            name="txtHospital"
+            id="txtHospital"
+            [(ngModel)]="scheduleObj['hospitalId']"
+            #txtHospital="ngModel"
+            list="HospitalBrowsers"
+            class="form-control"
+            placeholder="Select Hospital"
+            required
+          />
+          <datalist id="HospitalBrowsers">
+            <option
+              *ngFor="let hospital of allHospitals"
+              value="hospital['id']"
+              >{{ hospital["name"] }}</option
+            >
+          </datalist>
         </div>
+        <div class="form-group">
+          <input
+            type="date"
+            class="form-control"
+            name="txtDate"
+            id="txtDate"
+            [(ngModel)]="scheduleObj['date']"
+            #txtDate="ngModel"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="time"
+            class="form-control"
+            name="txtTime"
+            id="txtTime"
+            [(ngModel)]="scheduleObj['time']"
+            #txtTime="ngModel"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <input type="button" class="btn btn-primary" [disabled]="scheduleForm.invalid" value="Add Schedule" (click)="addSchedule();" />
+        </div>
+        <div *ngIf="txtHospital.touched || txtDate.touched || txtTime.touched">
+          <div *ngIf="txtHospital.errors?.required && txtHospital.touched">
+            <span class="text-danger">Hospital is required</span>
+          </div>
+          <div *ngIf="txtDate.errors?.required && txtDate.touched">
+            <span class="text-danger">Date is required</span>
+          </div>
+          <div *ngIf="txtTime.errors?.required && txtTime.touched">
+            <span class="text-danger">Time is required</span>
+          </div>
+        </div>
+      </div>
     </section>
   </form>
 </div>

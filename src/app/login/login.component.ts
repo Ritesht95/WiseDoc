@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DoctorService } from '../doctor.service';
+import { SessionService } from '../session.service';
 
 @Component({
   selector: 'app-login',
@@ -7,22 +8,24 @@ import { DoctorService } from '../doctor.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  constructor(public docService: DoctorService, public session: SessionService) {}
 
-  constructor(public docService: DoctorService) { }
+  ngOnInit() {}
 
-  ngOnInit() {
-  }
-
-  login(Username: string, Password: string, Type: boolean) {
+  login(Username: string, Password: string, Type: string) {
+    const typeToSend = (Type === 'D') ? true : false;
     this.docService.login(Username, Password, true).subscribe(
       res => {
         if (res.status === 200) {
-          alert(res.status);
+            this.session.setValues(res.data['userId'], res.data['userName'], Type);
+            alert(res.data['userId'] + ' ' + res.data['userName'] + ' ' + Type);
         } else {
           alert(res.data);
         }
+      },
+      err => {
+        console.log(err);
       }
     );
   }
-
 }

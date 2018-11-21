@@ -6,13 +6,15 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HospitalComponent } from './hospital/hospital.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
+import { PatienthistoryComponent } from './patienthistory/patienthistory.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent},
   { path: 'hospital', component: HospitalComponent},
   { path: 'schedule', component: ScheduleComponent },
-  { path: 'appointments', component: AppointmentsComponent }
+  { path: 'appointments', component: AppointmentsComponent },
+  { path: 'patientHistory', component: PatienthistoryComponent}
 ];
 
 @NgModule({
