@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
             this.session.setValues(res.data['userId'], res.data['email'], res.data['name'], Type);
             alert(res.data['userId'] + ' ' + res.data['userName'] + ' ' + Type);
         } else {
+          alert('Login Failed');
           alert(res.data);
         }
       },

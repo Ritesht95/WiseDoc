@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DoctorService } from '../doctor.service';
 
 @Component({
   selector: 'app-patient',
@@ -6,20 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./patient.component.css']
 })
 export class PatientComponent implements OnInit {
-
-  public objPatient = {
-    patientId : 'new',
-    name: '',
-    dob: '',
-    contactNo: '',
-    gender: 'M',
-    address: '',
-    email: ''
-  };
+  public objPatient = {};
+  public editPatientTask = false;
+  public addPatientTask = true;
+  public updateId = null;
 
   public patientArr = [
     {
-      patientId : 'new',
+      patientId: 'new',
       name: 'Vishant',
       dob: '28/7/1997',
       contactNo: '1029384756',
@@ -28,7 +23,7 @@ export class PatientComponent implements OnInit {
       email: 'vishantakhani@wisedoc.com'
     },
     {
-      patientId : 'new',
+      patientId: 'new',
       name: 'Vishant',
       dob: '28/7/1997',
       contactNo: '1029384756',
@@ -38,13 +33,40 @@ export class PatientComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(public doctorService: DoctorService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   submitForm() {
-    alert(this.objPatient.gender);
+    // Add Patient
   }
 
+  editPatient(objEdit) {
+    this.objPatient = objEdit;
+    this.updateId = objEdit.id;
+    this.editPatientTask = true;
+    this.addPatientTask = false;
+  }
+
+  deletePatient(id) {
+    this.doctorService.deleteHospital(id).subscribe(res => {
+      if (res.status === 200) {
+        alert('Hospital deleted successfully');
+      } else {
+        alert('Oops! Failed to delete Hospital');
+      }
+    });
+  }
+
+  update() {
+    if (this.updateId !== null) {
+      this.doctorService.updateHospital(this.objPatient).subscribe(res => {
+        if (res.status === 200) {
+          alert('Hopital updated Successfully');
+        } else {
+          alert('Oops! Failed to update Hospital');
+        }
+      });
+    }
+  }
 }
