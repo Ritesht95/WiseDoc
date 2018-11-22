@@ -94,7 +94,7 @@ export class DoctorService {
     const options = new RequestOptions({ headers: headers });
     const data: object = { startDate: new Date(), endDate: new Date() };
     return this._http
-      .post(environment.apiURL + 'Doctor/appointment', data, options)
+      .get(environment.apiURL + 'Doctor/allAppointments', options)
       .pipe(
         map(res => {
           return { status: res.status, data: res.json() };
@@ -130,6 +130,23 @@ export class DoctorService {
     const data: object = schduleObj;
     return this._http
       .post(environment.apiURL + 'Doctor/addSchedule', data, options)
+      .pipe(
+        map(res => {
+          return { status: res.status, data: res.json() };
+        })
+      );
+  }
+
+  getAllAppointments() {
+    const headers = new Headers({
+      // 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+      // 'Access-Control-Allow-Origin': '*'
+      'Content-Type': 'application/json;charset=ISO-8859-1'
+    });
+
+    const options = new RequestOptions({ headers: headers });
+    return this._http
+      .get(environment.apiURL + 'Doctor/allAppointments', options)
       .pipe(
         map(res => {
           return { status: res.status, data: res.json() };

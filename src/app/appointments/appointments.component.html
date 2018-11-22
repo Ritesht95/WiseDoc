@@ -9,7 +9,7 @@
               <div style="width: 100%;">
                 <div style="display: inline-block; width: 100%;">
                   <a [routerLink]="['/patientHistory']" [queryParams]="{ id : appointment.patientId }" routerLinkActive="router-link-active" ><span style="float: left;">{{appointment.patientName}}</span></a>
-                  <span style="float: right;"><strong>Time: </strong>{{appointment.time}}</span>
+                  <span style="float: right;"><strong>Date-Time: </strong>{{appointment.date + ' ' +appointment.time}}</span>
                 </div>
               </div>
             </h5>

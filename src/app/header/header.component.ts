@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SessionService } from '../session.service';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +9,9 @@ import { SessionService } from '../session.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  public fullName;
 
-  public fullName ;
-
-  constructor(session: SessionService) {
+  constructor(public session: SessionService, public router: Router) {
     if (session.getUserType() === 'Doctor') {
       this.fullName = session.getName();
     } else if (session.getUserType() === 'Hospital') {
@@ -20,7 +21,10 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
+  logout() {
+    this.session.logout();
+    this.router.navigate(['login']);
+  }
 }

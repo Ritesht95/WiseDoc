@@ -16,7 +16,7 @@
                     Appointments
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Today's Appointments</a>
+                    <a class="dropdown-item" [routerLink]="['/appointments']" routerLinkActive="router-link-active" >Today's Appointments</a>
                     <a class="dropdown-item" href="#">Upcoming Appointments</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Past Appointments</a>
@@ -28,10 +28,10 @@
                     Manage
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Manage Hospital</a>
-                    <a class="dropdown-item" href="#">Manage Schedule</a>
+                    <a class="dropdown-item" [routerLink]="['/hospital']" routerLinkActive="router-link-active" >Manage Hospital</a>
+                    <a class="dropdown-item" [routerLink]="['/schedule']" routerLinkActive="router-link-active" >Manage Schedule</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Manage Patients</a>
+                    <a class="dropdown-item" [routerLink]="['/patient']" routerLinkActive="router-link-active" >Manage Patients</a>
                 </div>
             </li>
         </ul>
@@ -42,7 +42,7 @@
                   Hello, {{fullName}}
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item" href="#">Logout</a>
+                  <a class="dropdown-item" href="#" (click)="logout();">Logout</a>
               </div>
           </li>
         </form>

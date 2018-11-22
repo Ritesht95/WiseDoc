@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-patienthistory',
@@ -6,19 +7,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./patienthistory.component.css']
 })
 export class PatienthistoryComponent implements OnInit {
+  patientId: string;
   patientObj = { Name: 'ABCD EFG' };
-  historyArr = [
-    {Date: '20th Nov, 2018', Time: '10:00', patientId: 12, description: 'sdjbvhjksdbv'},
-    {Date: '20th Nov, 2018', Time: '10:00', patientId: 12, description: 'sdjbvhjksdbv'},
-    {Date: '20th Nov, 2018', Time: '10:00', patientId: 12, description: 'sdjbvhjksdbv'}
-  ];
-  historyObj = { Date: '20th Nov, 2018', Time: '10:00', patientId: 12, description: 'sdjbvhjksdbv' }
+  historyArr = [];
+  today = new Date();
+  jstoday = '';
+  historyObj = { date: '20th Nov, 2018', time: '10:00', patientId: this.patientId, description: 'sdjbvhjksdbv' };
 
-  constructor() {}
+  constructor(private route: ActivatedRoute) {}
 
   addHistory() {
     this.historyArr.push(this.historyObj);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.patientId = params['id'];
+  });
+  }
 }
