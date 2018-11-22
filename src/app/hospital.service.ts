@@ -11,7 +11,7 @@ export class HospitalService {
   constructor(public _http: Http) { }
 
 
-  registerPatient(patientObj) {
+  public registerPatient(patientObj) {
     const headers = new Headers({
       // 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
       // 'Access-Control-Allow-Origin': '*'
@@ -57,6 +57,23 @@ export class HospitalService {
     const options = new RequestOptions({ headers: headers });
     return this._http
       .post(environment.apiURL + 'Hospital/deletePatient?id=' + id, options)
+      .pipe(
+        map(res => {
+          return { status: res.status, data: res.json() };
+        })
+      );
+  }
+
+  getAllPatients() {
+    const headers = new Headers({
+      // 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+      // 'Access-Control-Allow-Origin': '*'
+      'Content-Type': 'application/json;charset=ISO-8859-1'
+    });
+
+    const options = new RequestOptions({ headers: headers });
+    return this._http
+      .get(environment.apiURL + 'Hospital/allPatients', options)
       .pipe(
         map(res => {
           return { status: res.status, data: res.json() };

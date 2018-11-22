@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DoctorService } from '../doctor.service';
+import { HospitalService } from '../hospital.service';
 
 @Component({
   selector: 'app-patient',
@@ -7,38 +8,39 @@ import { DoctorService } from '../doctor.service';
   styleUrls: ['./patient.component.css']
 })
 export class PatientComponent implements OnInit {
-  public objPatient = {};
+  public objPatient = {
+    patientId: '',
+    name: '',
+    dob: '',
+    cno: '',
+    gender: '',
+    address: ''
+  };
   public editPatientTask = false;
   public addPatientTask = true;
   public updateId = null;
 
-  public patientArr = [
-    {
-      patientId: 'new',
-      name: 'Vishant',
-      dob: '28/7/1997',
-      contactNo: '1029384756',
-      gender: 'M',
-      address: 'sdkjbvksdjb',
-      email: 'vishantakhani@wisedoc.com'
-    },
-    {
-      patientId: 'new',
-      name: 'Vishant',
-      dob: '28/7/1997',
-      contactNo: '1029384756',
-      gender: 'M',
-      address: 'sdkjbvksdjb',
-      email: 'vishantakhani@wisedoc.com'
-    }
-  ];
+  public patientArr = [];
 
-  constructor(public doctorService: DoctorService) {}
+  constructor(public doctorService: DoctorService, public hospitalService: HospitalService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.hospitalService.getAllPatients().subscribe(
+      res => {
+        this.patientArr = res.data;
+      }
+    );
+  }
 
   submitForm() {
     // Add Patient
+    console.log(this.objPatient);
+    this.hospitalService.registerPatient(this.objPatient).subscribe(
+      res => {
+        alert(res.status);
+        console.log(res.data);
+      }
+    );
   }
 
   editPatient(objEdit) {
