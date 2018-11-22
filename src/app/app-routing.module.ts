@@ -9,6 +9,7 @@ import { AppointmentsComponent } from './appointments/appointments.component';
 import { PatienthistoryComponent } from './patienthistory/patienthistory.component';
 import { PatientComponent } from './patient/patient.component';
 import { AuthGuard } from './auth.guard';
+import { AddappointmentComponent } from './addappointment/addappointment.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -16,9 +17,10 @@ const routes: Routes = [
   { path: 'dashboard', canActivate : [AuthGuard], component: DashboardComponent},
   { path: 'hospital', component: HospitalComponent},
   { path: 'schedule', component: ScheduleComponent },
+  { path: 'addappointment', component: AddappointmentComponent },
   { path: 'appointments', component: AppointmentsComponent },
   { path: 'patientHistory', component: PatienthistoryComponent},
-  { path: 'patient', component: PatientComponent}
+  { path: 'patient', component: PatientComponent},
 ];
 
 @NgModule({

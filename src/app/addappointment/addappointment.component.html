@@ -1,0 +1,76 @@
+<app-header></app-header>
+<div class="container" style="margin-bottom: 100px;">
+  <form method="POST" #scheduleForm="ngForm">
+    <section id="hospital-form" class="mt-5 row">
+      <div class="col-md-5 mt-5 ml-5 mr-5">
+        <h3>Add Schedule</h3>
+        <br />
+        <div class="form-group">
+          <label>Patient</label>
+          <input
+            name="txtPatient"
+            id="txtPatient"
+            [(ngModel)]="appointmentObj['patientId']"
+            #txtPatient="ngModel"
+            list="PatientBrowsers"
+            class="form-control"
+            placeholder="Select Patient"
+            required
+          />
+          <datalist id="PatientBrowsers">
+            <option
+              *ngFor="let patient of allPatientsArr"
+              value="patient['id']"
+              >{{ patient["name"] }}</option
+            >
+          </datalist>
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            name="txtSchedule"
+            id="txtSchedule"
+            list="ScheduleBrowsers"
+            [(ngModel)]="appointmentObj['scheduleId']"
+            #txtSchedule="ngModel"
+            required
+          />
+        </div>
+        <datalist id="ScheduleBrowsers">
+            <option
+              *ngFor="let schedule of allScheduleArr"
+              value="schedule['id']"
+              >{{ schedule["name"] }}</option
+            >
+          </datalist>
+        <div class="form-group">
+          <textarea
+            type="time"
+            class="form-control"
+            name="txtDescription"
+            id="txtDescription"
+            [(ngModel)]="appointmentObj['description']"
+            #txtDescription="ngModel"
+            required
+          ></textarea>
+        </div>
+        <div class="form-group">
+          <input type="button" class="btn btn-primary" [disabled]="scheduleForm.invalid" value="Add Schedule" (click)="addSchedule();" />
+        </div>
+        <div *ngIf="txtPatient.touched || txtDescription.touched || txtSchedule.touched">
+          <div *ngIf="txtPatient.errors?.required && txtPatient.touched">
+            <span class="text-danger">Hospital is required</span>
+          </div>
+          <div *ngIf="txtSchedule.errors?.required && txtSchedule.touched">
+            <span class="text-danger">Date is required</span>
+          </div>
+          <div *ngIf="txtDescription.errors?.required && txtDescription.touched">
+            <span class="text-danger">Time is required</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </form>
+</div>
+<app-footer></app-footer>

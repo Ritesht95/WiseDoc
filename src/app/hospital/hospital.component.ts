@@ -7,37 +7,30 @@ import { DoctorService } from '../doctor.service';
   styleUrls: ['./hospital.component.css']
 })
 export class HospitalComponent implements OnInit {
-  public objHospital = {};
+  public objHospital = {
+      id: '',
+      name: '',
+      email: '',
+      contactNo: '',
+      personToContact: '',
+      password: '',
+      address: ''
+  };
   public editHospitalTask = false;
   public addHospitalTask = true;
   private updateId;
 
-  public hospitalArr = [
-    {
-      id: 1,
-      name: 'Manish Hospital',
-      email: 'contact@manishhospitals.com',
-      contactNo: '1234567890',
-      personToContact: 'Manish',
-      password: 'HelloManish',
-      address: 'Gali ke naake pe',
-      active: true
-    },
-    {
-      id: 2,
-      name: 'Manish Hospital',
-      email: 'contact@manishhospitals.com',
-      contactNo: '1234567890',
-      personToContact: 'Manish',
-      password: 'HelloManish',
-      address: 'Gali ke naake pe',
-      active: true
-    }
-  ];
+  public hospitalArr = [];
 
   constructor(public doctorService: DoctorService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.doctorService.getAllHospitals().subscribe(
+      res => {
+        this.hospitalArr =  res.data;
+      }
+    );
+  }
 
   submit() {
     this.doctorService.registerHospital(this.objHospital).subscribe(res => {
@@ -52,6 +45,8 @@ export class HospitalComponent implements OnInit {
   update() {
     if (this.updateId !== null) {
       this.doctorService.updateHospital(this.objHospital).subscribe(res => {
+        alert(res.status);
+        console.log(res.status);
         if (res.status === 200) {
           alert('Hopital updated Successfully');
         } else {
@@ -63,7 +58,7 @@ export class HospitalComponent implements OnInit {
 
   editHospital(objEdit) {
     this.objHospital = objEdit;
-    this.updateId = objEdit.id;
+    this.updateId = objEdit.hospitalId;
     this.editHospitalTask = true;
     this.addHospitalTask = false;
   }

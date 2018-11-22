@@ -20,7 +20,7 @@ export class DoctorService {
     const data: object = {
       email: Username,
       password: Password,
-      type: true
+      type: Type
     };
     return this._http
       .post(environment.apiURL + 'User/login', data, options)
@@ -76,7 +76,7 @@ export class DoctorService {
 
     const options = new RequestOptions({ headers: headers });
     return this._http
-      .post(environment.apiURL + 'Doctor/deleteHospital?id=' + id, options)
+      .delete(environment.apiURL + 'Doctor/deleteHospital?id=' + id, options)
       .pipe(
         map(res => {
           return { status: res.status, data: res.json() };
@@ -111,7 +111,7 @@ export class DoctorService {
 
     const options = new RequestOptions({ headers: headers });
     return this._http
-      .get(environment.apiURL + 'User/allhospitals', options)
+      .get(environment.apiURL + 'Doctor/allhospitals', options)
       .pipe(
         map(res => {
           return { status: res.status, data: res.json() };

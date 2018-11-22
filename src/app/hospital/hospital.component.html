@@ -118,7 +118,6 @@
             <th>Address</th>
             <th>Email</th>
             <th>Contact No</th>
-            <th>Status</th>
             <th>Edit</th>
             <th>Delete</th>
           </tr>
@@ -129,9 +128,8 @@
             <td>{{ item.address }}</td>
             <td>{{ item.email }}</td>
             <td>{{ item.contactNo }}</td>
-            <td>{{ item.active }}</td>
             <td><a (click)="editHospital(item)">Edit</a></td>
-            <td><a (click)="deleteHospital(item.id)">Delete</a></td>
+            <td><a (click)="deleteHospital(item.hospitalId)">Delete</a></td>
           </tr>
         </tbody>
       </table>

@@ -15,6 +15,7 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { PatienthistoryComponent } from './patienthistory/patienthistory.component';
 import { PatientComponent } from './patient/patient.component';
+import { AddappointmentComponent } from './addappointment/addappointment.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { PatientComponent } from './patient/patient.component';
     ScheduleComponent,
     AppointmentsComponent,
     PatienthistoryComponent,
-    PatientComponent
+    PatientComponent,
+    AddappointmentComponent
   ],
   imports: [
     BrowserModule,
