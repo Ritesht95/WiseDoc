@@ -52,7 +52,8 @@
           </div>
         </div>
         <div class="col-md-6">
-          <input type="submit" class="btn btn-success" value="Submit" (click)="submitForm()"/>&nbsp;
+          <input type="submit" *ngIf="addPatientTask" class="btn btn-success" value="Submit" (click)="submitForm()"/>&nbsp;
+          <input type="submit" *ngIf="editPatientTask" class="btn btn-success" value="Update" (click)="update()"/>&nbsp;
           <input type="reset" class="btn btn-default" value="Reset" />
         </div>
       </div>
@@ -76,8 +77,8 @@
             <td>{{ item.name }}</td>
             <td>{{ item.address }}</td>
             <td>{{ item.cno }}</td>
-            <td><a (click)="editPatient()">Edit</a></td>
-            <td><a (click)="deletePatient()">Delete</a></td>
+            <td><a (click)="editPatient(item)">Edit</a></td>
+            <td><a (click)="deletePatient(item.patientId)">Delete</a></td>
           </tr>
         </tbody>
       </table>

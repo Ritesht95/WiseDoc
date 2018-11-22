@@ -56,7 +56,7 @@ export class HospitalService {
 
     const options = new RequestOptions({ headers: headers });
     return this._http
-      .post(environment.apiURL + 'Hospital/deletePatient?id=' + id, options)
+      .delete(environment.apiURL + 'Hospital/deletePatient?id=' + id, options)
       .pipe(
         map(res => {
           return { status: res.status, data: res.json() };
@@ -74,6 +74,41 @@ export class HospitalService {
     const options = new RequestOptions({ headers: headers });
     return this._http
       .get(environment.apiURL + 'Hospital/allPatients', options)
+      .pipe(
+        map(res => {
+          return { status: res.status, data: res.json() };
+        })
+      );
+  }
+
+  getAllSchedule(id) {
+    const headers = new Headers({
+      // 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+      // 'Access-Control-Allow-Origin': '*'
+      'Content-Type': 'application/json;charset=ISO-8859-1'
+    });
+
+    const options = new RequestOptions({ headers: headers });
+    return this._http
+      .get(environment.apiURL + 'Hospital/allSchedule?id=' + 2 , options)
+      .pipe(
+        map(res => {
+          return { status: res.status, data: res.json() };
+        })
+      );
+  }
+
+  addAppointment(appointmentObj) {
+    const headers = new Headers({
+      // 'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+      // 'Access-Control-Allow-Origin': '*'
+      'Content-Type': 'application/json;charset=ISO-8859-1'
+    });
+
+    const options = new RequestOptions({ headers: headers });
+    const data: object = appointmentObj;
+    return this._http
+      .post(environment.apiURL + 'Hospital/addAppointment', data, options)
       .pipe(
         map(res => {
           return { status: res.status, data: res.json() };

@@ -33,7 +33,6 @@ export class PatientComponent implements OnInit {
   }
 
   submitForm() {
-    // Add Patient
     console.log(this.objPatient);
     this.hospitalService.registerPatient(this.objPatient).subscribe(
       res => {
@@ -45,15 +44,16 @@ export class PatientComponent implements OnInit {
 
   editPatient(objEdit) {
     this.objPatient = objEdit;
+    this.objPatient.dob = objEdit.dob.split(' ')[0];
     this.updateId = objEdit.id;
     this.editPatientTask = true;
     this.addPatientTask = false;
   }
 
   deletePatient(id) {
-    this.doctorService.deleteHospital(id).subscribe(res => {
+    this.hospitalService.deletePatient(id).subscribe(res => {
       if (res.status === 200) {
-        alert('Hospital deleted successfully');
+        alert('Patient deleted successfully');
       } else {
         alert('Oops! Failed to delete Hospital');
       }
@@ -62,9 +62,9 @@ export class PatientComponent implements OnInit {
 
   update() {
     if (this.updateId !== null) {
-      this.doctorService.updateHospital(this.objPatient).subscribe(res => {
+      this.hospitalService.updatePatient(this.objPatient).subscribe(res => {
         if (res.status === 200) {
-          alert('Hopital updated Successfully');
+          alert('Patient updated Successfully');
         } else {
           alert('Oops! Failed to update Hospital');
         }

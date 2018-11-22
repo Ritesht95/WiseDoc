@@ -45,8 +45,6 @@ export class HospitalComponent implements OnInit {
   update() {
     if (this.updateId !== null) {
       this.doctorService.updateHospital(this.objHospital).subscribe(res => {
-        alert(res.status);
-        console.log(res.status);
         if (res.status === 200) {
           alert('Hopital updated Successfully');
         } else {

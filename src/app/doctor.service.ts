@@ -129,7 +129,7 @@ export class DoctorService {
     const options = new RequestOptions({ headers: headers });
     const data: object = schduleObj;
     return this._http
-      .post(environment.apiURL + 'Doctor/addSchdule', data, options)
+      .post(environment.apiURL + 'Doctor/addSchedule', data, options)
       .pipe(
         map(res => {
           return { status: res.status, data: res.json() };

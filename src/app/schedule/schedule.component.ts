@@ -8,8 +8,12 @@ import { DoctorService } from '../doctor.service';
 })
 export class ScheduleComponent implements OnInit {
 
-  public scheduleObj = {};
-  public allHospitals = [];
+  public scheduleObj = {
+    hospitalId: '',
+    date: '',
+    time: '',
+  };
+  public allHospitalsArr = [];
 
   constructor(public doctorService: DoctorService) { }
 
@@ -18,7 +22,7 @@ export class ScheduleComponent implements OnInit {
     this.doctorService.getAllHospitals().subscribe(
       res => {
         if (res.status === 200) {
-          this.allHospitals = res.data;
+          this.allHospitalsArr = res.data;
         }
       }
     );

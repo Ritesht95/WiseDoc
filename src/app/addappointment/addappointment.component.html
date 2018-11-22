@@ -3,69 +3,75 @@
   <form method="POST" #scheduleForm="ngForm">
     <section id="hospital-form" class="mt-5 row">
       <div class="col-md-5 mt-5 ml-5 mr-5">
-        <h3>Add Schedule</h3>
+        <h3>Book Appointment</h3>
         <br />
         <div class="form-group">
-          <label>Patient</label>
-          <input
+          <label for="txtPatient" class="control-label">Patient</label>
+          <select
             name="txtPatient"
             id="txtPatient"
-            [(ngModel)]="appointmentObj['patientId']"
+            [(ngModel)]="appointmentObj.patientId"
             #txtPatient="ngModel"
-            list="PatientBrowsers"
             class="form-control"
-            placeholder="Select Patient"
-            required
-          />
-          <datalist id="PatientBrowsers">
+          >
             <option
               *ngFor="let patient of allPatientsArr"
-              value="patient['id']"
-              >{{ patient["name"] }}</option
+              value="{{patient.patientId}}"
+              >{{ patient.name }}</option
             >
-          </datalist>
+          </select>
         </div>
         <div class="form-group">
-          <input
-            type="text"
+          <label for="txtSchedule" class="control-label">Schedule</label>
+          <select
             class="form-control"
             name="txtSchedule"
             id="txtSchedule"
-            list="ScheduleBrowsers"
-            [(ngModel)]="appointmentObj['scheduleId']"
+            [(ngModel)]="appointmentObj.scheduleId"
             #txtSchedule="ngModel"
-            required
-          />
-        </div>
-        <datalist id="ScheduleBrowsers">
+          >
             <option
               *ngFor="let schedule of allScheduleArr"
-              value="schedule['id']"
-              >{{ schedule["name"] }}</option
+              value="{{schedule.scheduleId}}"
+              >{{ schedule.date + " " + schedule.time }}</option
             >
-          </datalist>
+          </select>
+        </div>
+
         <div class="form-group">
+          <label for="txtDescription" class="control-label"></label>
           <textarea
-            type="time"
             class="form-control"
             name="txtDescription"
             id="txtDescription"
-            [(ngModel)]="appointmentObj['description']"
+            [(ngModel)]="appointmentObj.description"
             #txtDescription="ngModel"
             required
           ></textarea>
         </div>
         <div class="form-group">
-          <input type="button" class="btn btn-primary" [disabled]="scheduleForm.invalid" value="Add Schedule" (click)="addSchedule();" />
+          <input
+            type="button"
+            class="btn btn-primary"
+            [disabled]="scheduleForm.invalid"
+            value="Add Schedule"
+            (click)="addAppointment()"
+          />
         </div>
-        <div *ngIf="txtPatient.touched || txtDescription.touched || txtSchedule.touched">
+        <div
+          *ngIf="
+            txtPatient.touched || txtDescription.touched || txtSchedule.touched
+          "
+        >
           <div *ngIf="txtPatient.errors?.required && txtPatient.touched">
             <span class="text-danger">Hospital is required</span>
           </div>
           <div *ngIf="txtSchedule.errors?.required && txtSchedule.touched">
             <span class="text-danger">Date is required</span>
           </div>
-          <div *ngIf="txtDescription.errors?.required && txtDescription.touched">
+          <div
+            *ngIf="txtDescription.errors?.required && txtDescription.touched"
+          >
             <span class="text-danger">Time is required</span>
           </div>
         </div>

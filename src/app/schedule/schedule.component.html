@@ -7,23 +7,20 @@
         <br />
         <div class="form-group">
           <label>Hospital Name</label>
-          <input
+          <select
+            id="HospitalBrowsers"
+            class="form-control"
             name="txtHospital"
             id="txtHospital"
-            [(ngModel)]="scheduleObj['hospitalId']"
+            [(ngModel)]="scheduleObj.hospitalId"
             #txtHospital="ngModel"
-            list="HospitalBrowsers"
-            class="form-control"
-            placeholder="Select Hospital"
-            required
-          />
-          <datalist id="HospitalBrowsers">
+          >
             <option
-              *ngFor="let hospital of allHospitals"
-              value="hospital['id']"
+              *ngFor="let hospital of allHospitalsArr"
+              value="{{hospital.hospitalId}}"
               >{{ hospital["name"] }}</option
             >
-          </datalist>
+          </select>
         </div>
         <div class="form-group">
           <input
@@ -31,7 +28,7 @@
             class="form-control"
             name="txtDate"
             id="txtDate"
-            [(ngModel)]="scheduleObj['date']"
+            [(ngModel)]="scheduleObj.date"
             #txtDate="ngModel"
             required
           />
@@ -42,13 +39,19 @@
             class="form-control"
             name="txtTime"
             id="txtTime"
-            [(ngModel)]="scheduleObj['time']"
+            [(ngModel)]="scheduleObj.time"
             #txtTime="ngModel"
             required
           />
         </div>
         <div class="form-group">
-          <input type="button" class="btn btn-primary" [disabled]="scheduleForm.invalid" value="Add Schedule" (click)="addSchedule();" />
+          <input
+            type="button"
+            class="btn btn-primary"
+            [disabled]="scheduleForm.invalid"
+            value="Add Schedule"
+            (click)="addSchedule()"
+          />
         </div>
         <div *ngIf="txtHospital.touched || txtDate.touched || txtTime.touched">
           <div *ngIf="txtHospital.errors?.required && txtHospital.touched">
