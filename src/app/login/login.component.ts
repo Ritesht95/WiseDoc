@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
     this.docService.login(Username, Password, true).subscribe(
       res => {
         if (res.status === 200) {
-            this.session.setValues(res.data['userId'], res.data['userName'], Type);
+            this.session.setValues(res.data['userId'], res.data['email'], res.data['name'], Type);
             alert(res.data['userId'] + ' ' + res.data['userName'] + ' ' + Type);
         } else {
           alert(res.data);

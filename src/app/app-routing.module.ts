@@ -8,10 +8,12 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { PatienthistoryComponent } from './patienthistory/patienthistory.component';
 import { PatientComponent } from './patient/patient.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'dashboard', component: DashboardComponent},
+  { path: 'login', component: LoginComponent },
+  { path: 'dashboard', canActivate : [AuthGuard], component: DashboardComponent},
   { path: 'hospital', component: HospitalComponent},
   { path: 'schedule', component: ScheduleComponent },
   { path: 'appointments', component: AppointmentsComponent },

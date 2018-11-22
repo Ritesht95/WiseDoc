@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SessionService } from '../session.service';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  public fullName ;
+
+  constructor(session: SessionService) {
+    if (session.getUserType() === 'Doctor') {
+      this.fullName = session.getName();
+    } else if (session.getUserType() === 'Hospital') {
+      this.fullName = session.getHName();
+    } else {
+      this.fullName = 'Ritesh';
+    }
+  }
 
   ngOnInit() {
   }

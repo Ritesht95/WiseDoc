@@ -1,74 +1,145 @@
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionService {
 
-  private IsDocLoggedIn = JSON.parse(
-    localStorage.getItem('DloggedIn' || 'false')
-  );
+  // private IsServerLoggedIn = false;
+  private IsDoctorLoggedIn = localStorage.getItem('DloggedIn');
+
+  // private IsSServerLoggedIn = false;
+  private IsHospitalLoggedIn = localStorage.getItem('HloggedIn');
 
   private UserID;
+  private Email;
+  private UserType;
   private Name;
-  private Type;
 
-  constructor() {
-    if (this.getDoctorLoggedIn() === 'true') {
-      this.setFromLocalStorage();
-    }
-  }
+  private HUserID;
+  private HEmail;
+  private HName;
+
+  constructor(private http: Http, private router: Router) {}
 
   getDoctorLoggedIn() {
-    this.IsDocLoggedIn = localStorage.getItem('DloggedIn');
-    return this.IsDocLoggedIn;
+    this.IsDoctorLoggedIn = localStorage.getItem('DloggedIn');
+    return this.IsDoctorLoggedIn;
   }
 
-  setDocLoggedIn(
-    UserID: number,
-    Name: string,
-    Type: string
-  ) {
-    localStorage.setItem('DloggedIn', 'true');
-    this.IsDocLoggedIn = 'true';
-    this.setValues(UserID, Name, Type);
+  getHospitalLoggedIn() {
+    this.IsHospitalLoggedIn = localStorage.getItem('HloggedIn');
+    return this.IsHospitalLoggedIn;
   }
 
-  setValues(UserID: number, Name: string, Type: string) {
-    this.UserID = UserID;
-    this.Name = Name;
-    this.Type = Type;
-    localStorage.setItem('sessionDUserID', this.UserID);
-    localStorage.setItem('sessionDName', this.Name);
-    localStorage.setItem('sessionUserType', this.Type);
+  setDoctorLoggedIn(value: string) {
+    if (value === 'true') {
+      this.clearAll();
+    }
+    this.IsDoctorLoggedIn = value;
+    localStorage.setItem('DloggedIn', value);
   }
 
-  setFromLocalStorage() {
-    this.UserID = localStorage.getItem('sessionDUserID');
-    this.Name = localStorage.getItem('sessionDName');
-    this.Type = localStorage.getItem('sessionUserType');
+  setHospitalLoggedIn(value: string) {
+    if (value === 'true') {
+      this.clearAll();
+    }
+    this.IsHospitalLoggedIn = value;
+    localStorage.setItem('HloggedIn', value);
   }
 
-  getUserID() {
-    this.UserID = localStorage.getItem('sessionDUserID');
-    return this.UserID;
+  setValues(UserID: number, Email: string, UserType: string, Name: string) {
+    if (UserType === 'seller') {
+      this.HUserID = UserID;
+      this.HName = Name;
+      this.HEmail = Email;
+      this.UserType = UserType;
+      localStorage.setItem('sessionHospitalUserID', this.HUserID);
+      localStorage.setItem('sessionHospitalName', this.HName);
+      localStorage.setItem('sessionHospitalEmail', this.HEmail);
+      localStorage.setItem('sessionUserType', this.UserType);
+    } else {
+      this.UserID = UserID;
+      this.Name = Name;
+      this.Email = Email;
+      this.UserType = UserType;
+      localStorage.setItem('sessionDoctorUserID', this.UserID);
+      localStorage.setItem('sessionDoctorName', this.Name);
+      localStorage.setItem('sessionDoctorEmail', this.Email);
+      localStorage.setItem('sessionUserType', this.UserType);
   }
+}
 
   getName() {
-    this.Name = localStorage.getItem('sessionDName');
+    this.Name = localStorage.getItem('sessionName');
     return this.Name;
   }
 
-  getType() {
-    this.Type = localStorage.getItem('sessionUserType');
-    return this.Type;
+  getUserID() {
+    this.UserID = localStorage.getItem('sessionUserID');
+    return this.UserID;
   }
 
-  logoutUser() {
-    localStorage.removeItem('sessionDUserID');
-    localStorage.removeItem('sessionDName');
-    localStorage.removeItem('sessionUserType');
-    localStorage.setItem('DloggedIn', 'false');
-    this.IsDocLoggedIn = 'false';
+  getEmail() {
+    this.Email = localStorage.getItem('sessionEmail');
+    return this.Email;
   }
+
+  getUserType() {
+    this.UserType = localStorage.getItem('sessionUserType');
+    return this.UserType;
+  }
+
+  getHName() {
+    this.HName = localStorage.getItem('sessionHospitalName');
+    return this.HName;
+  }
+
+  getHUserID() {
+    this.HUserID = localStorage.getItem('sessionHospitalUserID');
+    return this.HUserID;
+  }
+
+  getHEmail() {
+    this.HEmail = localStorage.getItem('sessionHospitalEmail');
+    return this.HEmail;
+  }
+
+  logout(sleep = false) {
+    if (this.getUserType() !== 'Hospital') {
+      localStorage.removeItem('sessionUserID');
+      localStorage.removeItem('sessionName');
+      localStorage.removeItem('sessionEmail');
+      localStorage.setItem('DloggedIn', 'false');
+      this.setDoctorLoggedIn('false');
+      if (sleep === false) {
+        this.router.navigate(['login']);
+      }
+    } else {
+      localStorage.removeItem('sessionHospitalUserID');
+      localStorage.removeItem('sessionHospitalName');
+      localStorage.removeItem('sessionHospitalEmail');
+      localStorage.setItem('HloggedIn', 'false');
+      this.setHospitalLoggedIn('false');
+      if (sleep === false) {
+        this.router.navigate(['login']);
+      }
+    }
+  }
+
+  clearAll() {
+      localStorage.removeItem('sessionUserID');
+      localStorage.removeItem('sessionName');
+      localStorage.removeItem('sessionEmail');
+      localStorage.setItem('DloggedIn', 'false');
+      this.setDoctorLoggedIn('false');
+      localStorage.removeItem('sessionHospitalUserID');
+      localStorage.removeItem('sessionHospitalName');
+      localStorage.removeItem('sessionHospitalEmail');
+      localStorage.setItem('HloggedIn', 'false');
+      this.setHospitalLoggedIn('false');
+  }
+
 }
