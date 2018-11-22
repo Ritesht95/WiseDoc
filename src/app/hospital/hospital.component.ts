@@ -7,14 +7,13 @@ import { DoctorService } from '../doctor.service';
   styleUrls: ['./hospital.component.css']
 })
 export class HospitalComponent implements OnInit {
-  public objHospital: object = {
+  public objHospital = {
     name: 'Manish Hospital',
     email: 'contact@manishhospitals.com',
     contactNo: '1234567890',
     personToContact: 'Manish',
     password: 'HelloManish',
-    address: 'Gali ke naake pe',
-    active: true
+    address: 'Gali ke naake pe'
   };
 
   public hospitalArr = [

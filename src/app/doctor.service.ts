@@ -18,7 +18,7 @@ export class DoctorService {
 
     const options = new RequestOptions({ headers: headers });
     const data: object = {
-      userName: Username,
+      email: Username,
       password: Password,
       type: true
     };
